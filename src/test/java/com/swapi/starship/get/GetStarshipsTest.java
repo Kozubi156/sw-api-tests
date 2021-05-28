@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetStarshipsTest extends BaseTest {
 
@@ -26,6 +27,8 @@ public class GetStarshipsTest extends BaseTest {
                 .response();
 
         JsonPath json = response.jsonPath();
+        List<String> results = json.getList("results");
+        assertEquals(10, results.size());
     }
 
     @Test
@@ -41,6 +44,7 @@ public class GetStarshipsTest extends BaseTest {
                 .response();
 
         JsonPath json = response.jsonPath();
+
     }
 
 }
