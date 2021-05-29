@@ -32,7 +32,7 @@ public class GetStarshipsTest extends BaseTest {
     }
 
     @Test
-    public void readOneStartShips() {
+    public void readOneStartShipsWithId() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -45,6 +45,23 @@ public class GetStarshipsTest extends BaseTest {
 
         JsonPath json = response.jsonPath();
 
+    }
+
+    @Test
+    public void readStartShipsWithName() {
+
+        Response response = given()
+                .spec(reqSpec)
+                .queryParam("name", "CR90 corvette")
+                .when()
+                .get(BASE_URL + STARSHIPS)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract()
+                .response();
+
+        JsonPath json = response.jsonPath();
+        assertEquals("CR90 corvette", json.get("name"));
     }
 
 }

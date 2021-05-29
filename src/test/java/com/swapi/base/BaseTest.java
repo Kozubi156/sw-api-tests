@@ -18,7 +18,7 @@ public class BaseTest {
     public static void beforeAll() {
         reqBuilder = new RequestSpecBuilder();
         reqBuilder.setContentType(ContentType.JSON);
-        reqBuilder.addFilter(new AllureRestAssured());
+//        reqBuilder.addFilter(new AllureRestAssured());
 
         reqSpec = reqBuilder.build();
     }
