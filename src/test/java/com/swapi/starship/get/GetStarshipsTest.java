@@ -44,6 +44,9 @@ public class GetStarshipsTest extends BaseTest {
                 .response();
 
         JsonPath json = response.jsonPath();
+        assertEquals("CR90 corvette", json.get("name"));
+        assertEquals("CR90 corvette", json.get("model"));
+        assertEquals("Corellian Engineering Corporation", json.get("manufacturer"));
 
     }
 
@@ -52,7 +55,7 @@ public class GetStarshipsTest extends BaseTest {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("name", "CR90 corvette")
+                .queryParam("name", "Star Destroyer")
                 .when()
                 .get(BASE_URL + STARSHIPS)
                 .then()
@@ -61,7 +64,7 @@ public class GetStarshipsTest extends BaseTest {
                 .response();
 
         JsonPath json = response.jsonPath();
-        assertEquals("CR90 corvette", json.get("name"));
+        assertEquals("Star Destroyer", json.get("name"));
     }
 
 }
