@@ -4,7 +4,6 @@ import com.swapi.base.BaseTest;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class GetStarshipsTest extends BaseTest {
     }
 
     @Test
-    public void readOneStartShipsWithId() {
+    public void readStartShipsById() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -51,11 +50,11 @@ public class GetStarshipsTest extends BaseTest {
     }
 
     @Test
-    public void readStartShipsWithName() {
+    public void readStartShipsByName() {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("name", "Star Destroyer")
+                .queryParam("search", "TIE Advanced x1")
                 .when()
                 .get(BASE_URL + STARSHIPS)
                 .then()
@@ -64,7 +63,7 @@ public class GetStarshipsTest extends BaseTest {
                 .response();
 
         JsonPath json = response.jsonPath();
-        assertEquals("Star Destroyer", json.get("name"));
+        assertEquals("TIE Advanced x1", json.get("results[0].name"));
     }
 
 }
